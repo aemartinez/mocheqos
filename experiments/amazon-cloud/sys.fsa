@@ -1,0 +1,48 @@
+.outputs C
+.state graph
+0 2 ! cred 1
+1 2 ? error 9
+1 2 ? token 13
+13 1 ! token 2
+2 1 ? fail 12
+2 1 ? ok 14
+14 1 ! helo 3
+14 1 ! quit 10
+3 1 ? int 4
+4 1 ! read 5
+4 1 ! quit 10
+5 1 ? size 6
+6 1 ! retr 7
+7 1 ? msg 8
+8 1 ! ack 4
+6 1 ! quit 10
+10 1 ? bye 11
+.marking 0
+.end
+
+.outputs S
+.state graph
+0 0 ? token 10
+10 0 ! fail 9
+10 0 ! ok 11
+11 0 ? helo 1
+11 0 ? quit 7
+1 0 ! int 2
+2 0 ? read 3
+2 0 ? quit 7
+3 0 ! size 4
+4 0 ? retr 5
+4 0 ? quit 7
+5 0 ! msg 6
+6 0 ? ack 2
+7 0 ! bye 8
+.marking 0
+.end
+
+.outputs A
+.state graph
+0 0 ? cred 1
+1 0 ! token 2
+1 0 ! error 3
+.marking 0
+.end

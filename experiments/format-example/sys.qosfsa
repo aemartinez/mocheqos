@@ -1,0 +1,28 @@
+fsa{
+    .outputs A
+    .state graph
+    0 1 ! x 1
+    1 1 ? y 2
+    2 1 ! z1 1
+    2 1 ! z2 3
+    .marking 0
+    .end
+
+    .outputs B
+    .state graph
+    0 0 ? x 1
+    1 0 ! y 2
+    2 0 ? z1 1
+    2 0 ? z2 3
+    .marking 0
+    .end
+}
+
+qos_attributes{cost:+, mem:max}
+
+qos_specifications{
+    A@1 : (and (<= 5 mem) (<= mem 10) (= cost (* 0.2 mem))),
+    B@3 : (and (= cost 1) (= mem 0))
+}
+
+final_states{A: [3],B: [3]}

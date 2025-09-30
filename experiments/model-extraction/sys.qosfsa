@@ -1,0 +1,56 @@
+fsa{
+    .outputs U
+    .state graph
+    0 1 ! compute 1
+    1 1 ? wip 1
+    1 1 ? result 2
+    2 1 ! stop 3
+    2 1 ! compute 1
+    .marking 0
+    .end
+
+    .outputs M
+    .state graph
+    0 0 ? stop 1
+    1 2 ! stop 2
+    0 0 ? compute 3
+    3 2 ! task 4
+    4 2 ! task 5
+    5 2 ? result 6
+    6 0 ! wip 7
+    7 2 ? result 8
+    8 0 ! result 0
+    .marking 0
+    .end
+
+    .outputs W
+    .state graph
+    0 1 ? stop 1
+    0 1 ? task 2
+    2 1 ! result 0
+    .marking 0
+    .end
+}
+
+qos_attributes{
+    p:+,
+    tnum:+,
+    pmem:max
+}
+
+qos_specifications{
+    U@0: (and (< 0 pmem) (< pmem 5) (= tnum 0) (= p 0)),
+    U@2: (and (= pmem 1) (= tnum 0) (= p 0)),
+
+    M@3: (and (< 0 pmem) (< pmem 10) (= tnum 0) (= p 0)),
+    M@6: (and (= pmem 1) (= tnum 0) (= p 0)),
+    M@8: (and (= pmem 1) (= p 10) (= tnum 0)),
+
+    W@2: (and (< 0 pmem) (< pmem (+ (/ 5 2) 1)) (= tnum 1) (=> (<= (- pmem 1) 1) (= p 1)) (=> (> (- pmem 1) 1) (= p (* 3 (- pmem 1)))))
+}
+
+final_states{
+    U: [3],
+    M: [2],
+    W: [1]
+}

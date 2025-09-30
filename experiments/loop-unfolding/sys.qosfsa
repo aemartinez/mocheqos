@@ -1,0 +1,93 @@
+fsa{
+    .outputs C
+    .state graph
+    0 2 ! cred 1
+    1 2 ? error 9
+    1 2 ? token 13
+    13 1 ! token 2
+    2 1 ? fail 12
+    2 1 ? ok 14
+    14 1 ! helo 3
+    14 1 ! quit 10
+    3 1 ? int 4
+    4 1 ! read 5
+    4 1 ! quit 10
+    5 1 ? size 6
+    6 1 ! retr 7
+    7 1 ? msg 8
+    8 1 ! ack 4
+    6 1 ! quit 10
+    10 1 ? bye 11
+    .marking 0
+    .end
+
+    .outputs S
+    .state graph
+    0 0 ? token 10
+    10 0 ! fail 9
+    10 0 ! ok 11
+    11 0 ? helo 1
+    11 0 ? quit 7
+    1 0 ! int 2
+    2 0 ? read 3
+    2 0 ? quit 7
+    3 0 ! size 4
+    4 0 ? retr 5
+    4 0 ? quit 7
+    5 0 ! msg 6
+    6 0 ? ack 2
+    7 0 ! bye 8
+    .marking 0
+    .end
+
+    .outputs A
+    .state graph
+    0 0 ? cred 1
+    1 0 ! token 2
+    1 0 ! error 3
+    .marking 0
+    .end
+}
+
+qos_attributes{
+    dataTransferredOut:+,
+    emailsRetrieved:+,
+    executionTime:+,
+    executionTimeServer:+,
+    instanceType:+,
+    CPUs:+,
+    networkPerformance:+,
+    memoryCapacity:+,
+    hourlyRateServerSoftware:+,
+    hourlyRateCompute:+,
+    transferGBRate:+,
+    usersAuthorized:+,
+    ratePerUserAuthorized:+,
+    clientPriceIncomingEmails:+
+}
+
+qos_specifications{
+    C@0 : (and (= dataTransferredOut 0) (= emailsRetrieved 0) (< 0.5 executionTime) (< executionTime 3) (= executionTimeServer 0) (= instanceType 0) (= CPUs 0) (= networkPerformance 0) (= memoryCapacity 0) (= hourlyRateServerSoftware 0) (= hourlyRateCompute 0) (= transferGBRate 0) (= usersAuthorized 0) (= ratePerUserAuthorized 0) (= clientPriceIncomingEmails 0) ) ,
+    C@1 : (and (= dataTransferredOut 2) (= emailsRetrieved 0) (= executionTime 0) (= executionTimeServer 0) (= instanceType 0) (= CPUs 0) (= networkPerformance 0) (= memoryCapacity 0) (= hourlyRateServerSoftware 0) (= hourlyRateCompute 0) (= transferGBRate 0) (= usersAuthorized 0) (= ratePerUserAuthorized 0) (= clientPriceIncomingEmails 0) ) , 
+    C@2 : (and (= dataTransferredOut 2) (= emailsRetrieved 0) (= executionTime 0) (= executionTimeServer 0) (= instanceType 0) (= CPUs 0) (= networkPerformance 0) (= memoryCapacity 0) (= hourlyRateServerSoftware 0) (= hourlyRateCompute 0) (= transferGBRate 0) (= usersAuthorized 0) (= ratePerUserAuthorized 0) (= clientPriceIncomingEmails 0) ) , 
+    C@4 : (and (= dataTransferredOut 0) (= emailsRetrieved 0) (< 0.5 executionTime) (< executionTime 3) (= executionTimeServer 0) (= instanceType 0) (= CPUs 0) (= networkPerformance 0) (= memoryCapacity 0) (= hourlyRateServerSoftware 0) (= hourlyRateCompute 0) (= transferGBRate 0) (= usersAuthorized 0) (= ratePerUserAuthorized 0) (= clientPriceIncomingEmails 0) ) , 
+    C@7 : (and (= dataTransferredOut 0) (= emailsRetrieved 0) (< 0.5 executionTime) (< executionTime 3) (= executionTimeServer 0) (= instanceType 0) (= CPUs 0) (= networkPerformance 0) (= memoryCapacity 0) (= hourlyRateServerSoftware 0) (= hourlyRateCompute 0) (= transferGBRate 0) (= usersAuthorized 0) (= ratePerUserAuthorized 0) (= clientPriceIncomingEmails 0) ) , 
+    C@8 : (and (= dataTransferredOut 0) (= emailsRetrieved 1) (= executionTime 0) (= executionTimeServer 0) (= instanceType 0) (= CPUs 0) (= networkPerformance 0) (= memoryCapacity 0) (= hourlyRateServerSoftware 0) (= hourlyRateCompute 0) (= transferGBRate 0) (= usersAuthorized 0) (= ratePerUserAuthorized 0) (= clientPriceIncomingEmails 0.1) ) ,
+    
+    S@0 : (and (=> (= instanceType 1) (and (= hourlyRateCompute 0.0042) (= CPUs 2) (= memoryCapacity 0.5) (<= networkPerformance 5) )) (=> (= instanceType 2) (and (= hourlyRateCompute 0.0084) (= CPUs 2) (= memoryCapacity 1) (<= networkPerformance 5) )) (=> (= instanceType 3) (and (= hourlyRateCompute 0.1344) (= CPUs 4) (= memoryCapacity 16) (<= networkPerformance 5) )) (= hourlyRateServerSoftware 0.1) (= transferGBRate 0.09) (= instanceType 1) (= dataTransferredOut 0) (= emailsRetrieved 0) (= executionTime 0) (= executionTimeServer 0) (= usersAuthorized 0) (= ratePerUserAuthorized 0) (= clientPriceIncomingEmails 0) ) ,
+    S@1 : (and (< 0.5 executionTime) (< executionTime 3) (= executionTime executionTimeServer) (= dataTransferredOut 0) (= emailsRetrieved 0) (= instanceType 0) (= CPUs 0) (= networkPerformance 0) (= memoryCapacity 0) (= hourlyRateServerSoftware 0) (= hourlyRateCompute 0) (= transferGBRate 0) (= usersAuthorized 0) (= ratePerUserAuthorized 0) (= clientPriceIncomingEmails 0) ) ,
+    S@3 : (and (< 0.5 executionTime) (< executionTime 3) (= executionTime executionTimeServer) (= dataTransferredOut 0) (= emailsRetrieved 0) (= instanceType 0) (= CPUs 0) (= networkPerformance 0) (= memoryCapacity 0) (= hourlyRateServerSoftware 0) (= hourlyRateCompute 0) (= transferGBRate 0) (= usersAuthorized 0) (= ratePerUserAuthorized 0) (= clientPriceIncomingEmails 0) ) ,
+    S@5 : (and (< 0.5 executionTime) (< executionTime 3) (= executionTime executionTimeServer) (= dataTransferredOut 0) (= emailsRetrieved 0) (= instanceType 0) (= CPUs 0) (= networkPerformance 0) (= memoryCapacity 0) (= hourlyRateServerSoftware 0) (= hourlyRateCompute 0) (= transferGBRate 0) (= usersAuthorized 0) (= ratePerUserAuthorized 0) (= clientPriceIncomingEmails 0) ) ,
+    S@6 : (and (< 10 dataTransferredOut) (< dataTransferredOut 500) (= emailsRetrieved 0) (= executionTime 0) (= executionTimeServer 0) (= instanceType 0) (= CPUs 0) (= networkPerformance 0) (= memoryCapacity 0) (= hourlyRateServerSoftware 0) (= hourlyRateCompute 0) (= transferGBRate 0) (= usersAuthorized 0) (= ratePerUserAuthorized 0) (= clientPriceIncomingEmails 0) ) ,
+    S@10 : (and (< 0.5 executionTime) (< executionTime 3) (= executionTime executionTimeServer) (= dataTransferredOut 0) (= emailsRetrieved 0) (= instanceType 0) (= CPUs 0) (= networkPerformance 0) (= memoryCapacity 0) (= hourlyRateServerSoftware 0) (= hourlyRateCompute 0) (= transferGBRate 0) (= usersAuthorized 0) (= ratePerUserAuthorized 0) (= clientPriceIncomingEmails 0) ) ,
+
+    A@0 : (and (= ratePerUserAuthorized 0.001) (= dataTransferredOut 0) (= emailsRetrieved 0) (= executionTime 0) (= executionTimeServer 0) (= instanceType 0) (= CPUs 0) (= networkPerformance 0) (= memoryCapacity 0) (= hourlyRateServerSoftware 0) (= hourlyRateCompute 0) (= transferGBRate 0) (= usersAuthorized 0) (= clientPriceIncomingEmails 0) ) ,
+    A@1 : (and (= usersAuthorized 1) (< 0.5 executionTime) (< executionTime 3) (= dataTransferredOut 0) (= emailsRetrieved 0) (= executionTimeServer 0) (= instanceType 0) (= CPUs 0) (= networkPerformance 0) (= memoryCapacity 0) (= hourlyRateServerSoftware 0) (= hourlyRateCompute 0) (= transferGBRate 0) (= ratePerUserAuthorized 0) (= clientPriceIncomingEmails 0) ),
+    A@2 : (and (= dataTransferredOut 2) (= emailsRetrieved 0) (= executionTime 0) (= executionTimeServer 0) (= instanceType 0) (= CPUs 0) (= networkPerformance 0) (= memoryCapacity 0) (= hourlyRateServerSoftware 0) (= hourlyRateCompute 0) (= transferGBRate 0) (= usersAuthorized 0) (= ratePerUserAuthorized 0) (= clientPriceIncomingEmails 0) )
+}
+
+final_states{
+    C: [11, 12, 9],
+    S: [8, 9],
+    A: [2, 3]
+}

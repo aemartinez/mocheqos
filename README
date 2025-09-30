@@ -1,0 +1,15 @@
+MoCheQoS is a bounded model checker for quality of service (QoS) properties of message-passing systems. MoCheQoS (i) exploits some features of ChorGram (a tool chain to support choreographic development of message-oriented applications) and (ii) relies on Z3 (a state-of-the-art SMT solver) to check the satisfiability of the QoS properties.
+
+The file mocheqos-artifact.zip published in https://doi.org/10.5281/zenodo.10038447 contains:
+- a file `mocheqos-docker-image.tar` that is the docker image to be loaded using the command `docker load`
+- a directory `code/` containing, for sake of completeness, the source code of the tool
+- a tutorial entry point `code/wiki/Home.md` with instructions for evaluating MoCheQoS
+
+Running the Docker container:
+
+- Loading the docker image with the command `docker load < mocheqos-docker-image.tar`,
+- Run the docker container with the command `docker run -v $(pwd)/experiments:/mocheqos/experiments -v $(pwd)/wiki:/mocheqos/wiki -it mocheqos`.
+
+Please refer to `code/wiki/installation.md` for more detailed instructions on how to start the docker container.
+
+The landing point of the tutorial for evaluating MoCheQoS is file the file `code/wiki/Home.md`. An online human-readable renderisation of the tutorial is at https://bitbucket.org/aemartinez/chorgram/src/mocheqos-fm24/wiki/Home.md

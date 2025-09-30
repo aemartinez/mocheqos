@@ -1,0 +1,4 @@
+packages: 
+    *.cabal
+    smt-lib smt-lib/smt-lib.cabal
+    simple-smt simple-smt/simple-smt.cabal
