@@ -1,9 +1,9 @@
 cabal-version:  3.6
-name:           chorgram
-version:        0.1
+name:           mocheqos-tool
+version:        1.0
 build-type:     Simple
 
-executable project
+executable project-gc
   hs-source-dirs: .
   main-is: project.hs
   build-depends: 

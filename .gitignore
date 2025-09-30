@@ -84,3 +84,6 @@ experiments/results
 # Ignore emacs auto-saved files
 *~
 \#*\#
+
+# Ignore Cabal installation directory
+dist-newstyle/
