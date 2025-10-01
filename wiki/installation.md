@@ -1,34 +1,132 @@
-# Installation
+## Installation
 
-The artifact is distributed as a Docker image with all the necessary dependencies and files needed to reproduce the experiments presented in the paper. The Docker image contains the tool compiled and ready to use.
+MoCheQoS can be installed in two ways. Choose the method that best fits your needs:
 
-## Load and run docker image
+- **Method 1: Manual Installation** - Requires manual dependency management
+- **Method 2: Docker Installation** - Complete isolated environment
 
-Load the docker image `mocheqos-docker-image.tar` with the following command
+While the Docker installation is fully automated, the initial build process can take considerable time.
 
-```bash
-docker load < mocheqos-docker-image.tar
-```
+## Method 1: Manual Installation
 
-After going to the directory in your machine were you want the experiment data to be written to,
-create and run a new docker container with the following command
+### Prerequisites
 
-```bash
-docker run -v $(pwd)/experiments:/mocheqos/experiments -v $(pwd)/wiki:/mocheqos/wiki -it mocheqos
-```
+Before installing MoCheQoS, you need to install Haskell and Cabal. The recommended way is to use GHCup, which provides an easy way to install and manage Haskell toolchain components.
 
-Besides starting the container and giving you a shell within it, this command will bind the `experiments/` and `wiki/` directories within the artifact to local directories in your machine. This will allow you to read and inspect both the wiki and the experiment data and results from your local machine.
+### Installing Haskell and Cabal with GHCup
 
-Continue the rest of the tutorial ([Usage](usage.md) and [Experiments](experiments.md)) from within the container.
+1. **Install GHCup:**
+   ```bash
+   curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+   ```
+   
+   Follow the prompts to add GHCup to your PATH. You may need to restart your terminal or run:
+   ```bash
+   source ~/.ghcup/env
+   ```
+   
+   *For the most up-to-date installation instructions, see the [GHCup website](https://www.haskell.org/ghcup/).*
 
-## (OPTIONAL) Build the docker image yourself
+2. **Install GHC (Glasgow Haskell Compiler) and Cabal:**
+   ```bash
+   ghcup install ghc
+   ghcup install cabal
+   ```
 
-Follow this intructions if you want or need to build the docker image. You will need internet connection.
+3. **Install Alex and Happy:**
+   ```bash
+   cabal install alex happy
+   ```
 
-Run the following command within the `code/` directory (or at the top level of the repository if you cloned it from [here](https://bitbucket.org/aemartinez/chorgram/src/mocheqos-fm24/)).
+4. **Install Z3 SMT Solver:**
+   
+   **On macOS:**
+   ```bash
+   brew install z3
+   ```
+   
+   **On Ubuntu/Debian:**
+   ```bash
+   sudo apt-get install z3
+   ```
+   
+   **On other systems:**
+   Download from [Z3 releases](https://github.com/Z3Prover/z3/releases) or build from source.
 
-```bash
-docker build -t mocheqos .
-```
+5. **Verify installation:**
+   ```bash
+   ghc --version
+   cabal --version
+   alex --version
+   happy --version
+   z3 --version
+   ```
 
-This will create a new image with the tag mocheqos. The process of creating the image retrieves all the necessary dependencies, compiles and install the tool. You can run this newly created image by using the `docker run` command stated above.
+### Installing MoCheQoS
+
+Once you have all the prerequisites installed, you can install MoCheQoS:
+
+1. **Clone the repository:**
+   ```bash
+   git clone git@github.com:aemartinez/mocheqos.git
+   cd mocheqos
+   ```
+
+2. **Build and install:**
+   ```bash
+   cabal install
+   ```
+
+3. **Verify MoCheQoS installation:**
+   ```bash
+   mocheqos --help
+   ```
+
+---
+
+## Method 2: Docker Installation
+
+This method provides a complete isolated environment with all dependencies pre-installed and MoCheQoS pre-compiled.
+
+### Prerequisites
+
+- Docker installed on your system
+- Sufficient disk space (the image will be ~5 GB)
+
+### Building and Running MoCheQoS with Docker
+
+1. **Clone the repository:**
+   ```bash
+   git clone git@github.com:aemartinez/mocheqos.git
+   cd mocheqos
+   ```
+
+2. **Build the Docker image:**
+   ```bash
+   docker build -t mocheqos .
+   ```
+   
+   **Note:** If you're on Apple Silicon (M1/M2) Mac, you may need to specify the platform `linux/amd64` for compatibility:
+   ```bash
+   docker build --platform linux/amd64 -t mocheqos .
+   ```
+
+3. **Run the container:**
+   ```bash
+   docker run -v $(pwd)/experiments:/mocheqos/experiments -v $(pwd)/wiki:/mocheqos/wiki -it mocheqos
+   ```
+   
+   This will start an interactive shell inside the container.
+
+4. **Verify MoCheQoS installation (from inside the container):**
+   ```bash
+   mocheqos --help
+   ```
+
+The Docker container includes:
+- All required Haskell tools (GHC, Cabal, Alex, Happy)
+- Z3 SMT solver
+- Python dependencies for experiments
+- Pre-configured environment
+- All MoCheQoS dependencies pre-installed
+- MoCheQoS pre-compiled and ready to use
