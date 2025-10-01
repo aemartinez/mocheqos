@@ -1,1 +1,0 @@
-/home/emilio/.emacs.d/mymodes/sgc-mode.el

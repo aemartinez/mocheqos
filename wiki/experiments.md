@@ -1,5 +1,17 @@
 # Reproducing experiments
 
+This document presents the experiments published in the following paper:
+
+    Lopez Pombo, C.G., Martinez Suñé, A.E., Tuosto, E. (2025). Automated Static Analysis of Quality of Service Properties of Communicating Systems. In: Platzer, A., Rozier, K.Y., Pradella, M., Rossi, M. (eds) Formal Methods. FM 2024. Lecture Notes in Computer Science, vol 14934. Springer, Cham. https://doi.org/10.1007/978-3-031-71177-0_7
+
+## Prerequisites
+
+To run the experiments, you need:
+- **Python 3** with the following packages (only needed for running these specific experiment scripts, not for using mocheqos itself):
+  - `numpy`
+  - `matplotlib`
+- **MoCheQoS tools** - set up as described in [installation.md](installation.md)
+
 The results presented in the paper have been obtained running MoCheQoS on an 8-cores MacBook Pro (Apple M1) with 16GB of memory.
 All the experiments measure execution times. The execution times reported in the paper may differ from the ones reproduced within the Docker container (possibly due to different hardware).
 
@@ -45,7 +57,7 @@ time mocheqos validity experiments/amazon-cloud/sys.qosfsa experiments/amazon-cl
 time mocheqos validity experiments/amazon-cloud/sys.qosfsa experiments/amazon-cloud/price-bound-4.ql 100
 ```
 
-# Model extraction
+## Model extraction
 
 The system used in the case study of section 4.2 of the paper is modeled in the file `experiments/model-extraction/sys.qosfsa` and is shown in the figure below.
 
@@ -53,9 +65,9 @@ The system used in the case study of section 4.2 of the paper is modeled in the 
 
 The formulas `Φ1` ... `Φ4` described in the last paragraph of the section are written in the files `experiments/model-extraction/phi1.ql` ... `experiments/model-extraction/phi4.ql`.
 
-For a detailed description of the system and the formulas please see section 4.1 of the paper.
+For a detailed description of the system and the formulas please see section 4.2 of the paper.
 
-The following command will run the checks needed to complete Table 3 of section 4.1 of the paper. It will print one row at a time starting with `Φ1` and ending with `Φ4`. For each row, it will execute the experiments as presented in Table 3 from left to right, starting with `satisfiability` with bound `k = 18` and ending with `validity` with bound `k = 32`. 
+The following command will run the checks needed to complete Table 3 of section 4.2 of the paper. It will print one row at a time starting with `Φ1` and ending with `Φ4`. For each row, it will execute the experiments as presented in Table 3 from left to right, starting with `satisfiability` with bound `k = 18` and ending with `validity` with bound `k = 32`. 
 
 ```bash
 python3 experiments/model-extraction/run-experiments.py
@@ -66,7 +78,7 @@ Notice that when the table states `No CE` the tool should output the text `No co
 
 ## Loop unfoldings
 
-The system used in the experiments section 4.2 (subsection "Loop unfolding") of the paper is modeled in the file `experiments/loop-unfolding/sys.qosfsa`.
+The system used in the experiments section 4.3 (subsection "Loop unfolding") of the paper is modeled in the file `experiments/loop-unfolding/sys.qosfsa`.
 The experiments consist of checking the satisfiability of synthetically generated formulas with the shape `Φ1 Until [G] Φ2`, where `G` is the `n`-unfolding of the loop in the system and `n` ranges from 1 to 10. For a detailed description of the system and the formula please see section 4.2 of the paper.
 
 ### Satisfiable formulas

@@ -87,7 +87,36 @@ test-suite hspec
                , containers
                , smt-lib
                , transformers
+               , filepath
+               , text
+               , MissingH
+               , hashable
+               , array
+               , hxt
+               , split
+               , simple-smt
+               , unordered-containers
+               , directory
   other-modules:
     QoS.LogicSpec
-  hs-source-dirs: test
+    CFSM
+    DotStuff
+    ErlanGC
+    FSA
+    GCParser
+    Misc
+    PomsetSemantics
+    QoS.CFSM
+    QoS.CFSM.Lexer
+    QoS.CFSM.Parser
+    QoS.CFSM.QoSMapLexer
+    QoS.CFSM.QoSMapParser
+    QoS.Logic
+    QoS.Logic.Lexer
+    QoS.Logic.Parser
+    SyntacticGlobalChoreographies
+    SystemParser
+    TS
+    WellFormedness
+  hs-source-dirs: test, .
   build-tool-depends: hspec-discover:hspec-discover == 2.*

@@ -16,7 +16,7 @@ type DotNode = Int
 
 getDotConf :: IO(Map String DotString)
 getDotConf = do
-  let cwd = "/root/.cabal/"
+  cwd <- getCurrentDirectory
   cfg <- getConf (cwd </> "aux/chorgram.config")
   getConf (cwd </> cfg!"dot")
 

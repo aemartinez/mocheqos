@@ -1,3 +1,5 @@
 The case study is taken from "kmclib: Automated Inference and Verification of Session Types" (https://arxiv.org/abs/2111.12147). 
 
-The communicating system is the one showed in Fig. 2.
+The communicating system is the one shown in Fig. 2 in [1].
+
+[1] Lopez Pombo, C.G., Martinez Suñé, A.E., Tuosto, E. (2025). Automated Static Analysis of Quality of Service Properties of Communicating Systems. In: Platzer, A., Rozier, K.Y., Pradella, M., Rossi, M. (eds) Formal Methods. FM 2024. Lecture Notes in Computer Science, vol 14934. Springer, Cham. https://doi.org/10.1007/978-3-031-71177-0_7

@@ -87,3 +87,10 @@ experiments/results
 
 # Ignore Cabal installation directory
 dist-newstyle/
+
+# Ignore results of experiments
+experiments/loop-unfolding/results/
+experiments/loop-unfolding/phi.ql
+experiments/nested-choices/results/
+experiments/nested-choices/prop/
+experiments/nested-choices/sys/

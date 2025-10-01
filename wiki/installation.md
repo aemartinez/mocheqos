@@ -111,16 +111,54 @@ This method provides a complete isolated environment with all dependencies pre-i
    docker build --platform linux/amd64 -t mocheqos .
    ```
 
-3. **Run the container:**
-   ```bash
-   docker run -v $(pwd)/experiments:/mocheqos/experiments -v $(pwd)/wiki:/mocheqos/wiki -it mocheqos
-   ```
-   
-   This will start an interactive shell inside the container.
+3. **Set up a function for easy usage:**
 
-4. **Verify MoCheQoS installation (from inside the container):**
+   **Option A: Evaluate the function immediately (temporary):**
+   ```bash
+   # Run this command to use mocheqos in your current session
+   mocheqos() {
+       docker run -v $(pwd):/workspace mocheqos bash -c "cd /workspace && mocheqos $*"
+   }
+   ```
+
+   **Option B: Add to shell configuration (permanent):**
+   ```bash
+   # Add this function to your shell configuration (~/.bashrc, ~/.zshrc, or ~/.bash_profile)
+   echo 'mocheqos() {
+       docker run -v $(pwd):/workspace mocheqos bash -c "cd /workspace && mocheqos $*"
+   }' >> ~/.bashrc
+   
+   # Reload your shell configuration
+   source ~/.bashrc  # or ~/.zshrc
+   ```
+
+4. **Set up project-gc function (optional):**
+
+   The `project-gc` tool converts global choreographies (`.qosgc` files) to finite state automata (`.qosfsa` files).
+
+   **Option A: Evaluate the function immediately (temporary):**
+   ```bash
+   # Run this command to use project-gc in your current session
+   project-gc() {
+       docker run -v $(pwd):/workspace mocheqos bash -c "cd /workspace && project-gc $*"
+   }
+   ```
+
+   **Option B: Add to shell configuration (permanent):**
+   ```bash
+   # Add this function to your shell configuration (~/.bashrc, ~/.zshrc, or ~/.bash_profile)
+   echo 'project-gc() {
+       docker run -v $(pwd):/workspace mocheqos bash -c "cd /workspace && project-gc $*"
+   }' >> ~/.bashrc
+   
+   # Reload your shell configuration
+   source ~/.bashrc  # or ~/.zshrc
+   ```
+
+5. **Verify MoCheQoS installation:**
    ```bash
    mocheqos --help
+   project-gc --help
    ```
 
 The Docker container includes:
