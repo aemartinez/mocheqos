@@ -1,6 +1,6 @@
 <table style="border: none; border-collapse: collapse;">
 <tr>
-<td valign="middle" style="border: none; padding: 0;"><img src="wiki/logo.png" alt="MoCheQoS Logo" width="160" height="120"></td>
+<td valign="middle" style="border: none; padding: 0;"><img src="wiki/logo.png" alt="MoCheQoS Logo" width="150" height="150"></td>
 <td valign="middle" style="border: none; padding: 0;"><h1>MoCheQoS: A Tool for Static Analysis of QoS in Communicating Systems</h1></td>
 </tr>
 </table>
